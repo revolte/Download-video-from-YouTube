@@ -11,8 +11,8 @@ def on_progress(stream, total_size, bytes_remaining):
 
 url = input('Past your Youtube Video Link :')
 yt = YouTube(url)
-print(yt.streams)
-print('The video name and size : ', yt.title, yt.streams.first().filesize_mb, 'Mb')
+# print(yt.streams)
+print('The video name and size : ', yt.title, yt.streams.get_highest_resolution().filesize_mb, 'Mb')
 yt = YouTube(url, on_progress_callback=on_progress)
 
 out = yt.streams.get_highest_resolution().download()
