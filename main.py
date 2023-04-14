@@ -1,4 +1,5 @@
 from pytube import YouTube
+import time
 
 
 def on_progress(stream, total_size, bytes_remaining):
@@ -15,6 +16,10 @@ yt = YouTube(url)
 print('The video name and size : ', yt.title, yt.streams.get_highest_resolution().filesize_mb, 'Mb')
 yt = YouTube(url, on_progress_callback=on_progress)
 
-out = yt.streams.get_highest_resolution().download()
+start = time.time()
+yt.streams.get_highest_resolution().download('E:/video')
+end = time.time()
+file_size = yt.streams.get_highest_resolution().filesize_mb
+print(f' \nDownload complete in {(end - start):0.2f} second at {file_size / (end - start):0.2f} Mb/s')
 
-print(" Download complete")
+
